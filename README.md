@@ -12,6 +12,8 @@ npm install
 open config.js to set your twitter username, password and schedule settings
 npm start
 ```
+#### Usage Result Example
+![alt text](https://github.com/taheroo/Tweet-puppeteer/blob/master/resultExample.png "Result Example")
 ### Customize Posts
 The application use Asvice Slip API to generate random advice posts. 
 If you want to use another API to get posts to tweet then go to app.js file and change this default code to your way.
