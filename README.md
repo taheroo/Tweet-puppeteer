@@ -9,9 +9,16 @@ npm install
 ```
 ### Usage
 ```
-open config.js to set your twitter username, password and schedule settings
-npm start
+node app.js --username="USERNAME" --password="PASSWORD" --schedule="SCHEDULE"
 ```
+> :warning: **USERNAME**: Twitter account username.<br>
+> :warning: **PASSWORD**: Twitter account password.<br>
+> :warning: **SCHEDULE**: Cron schedule expression. You can generate your schedule expression using [crontab guru](https://crontab.guru/)<br>
+> :information_source: **Usage example**:<br> 
+```
+node app.js --username="my_twitter_username" --password="my_twitter_password" --schedule="*/2 * * * *"
+```
+This will post a new tweet each 2 minutes
 #### Usage Result Example
 ![alt text](https://github.com/taheroo/Tweet-puppeteer/blob/master/resultExample.png "Result Example")
 ### Customize Posts
