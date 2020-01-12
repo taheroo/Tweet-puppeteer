@@ -1,15 +1,24 @@
-const config = require("./config");
-
 const express = require("express");
 const cron = require("node-cron");
 const request = require("request");
 const EventEmitter = require("events").EventEmitter;
+const argv = require('yargs').argv;
 
 const puppeteerCustomizedFunctions = require("./puppeteerCustomizedFunctions");
 
 const port = process.env.PORT || 3000;
 const app = express();
-
+let config;
+if(argv.username !== undefined && argv.password !== undefined && argv.schedule !== undefined) {
+    config = {
+    username: argv.username,
+    password: argv.password,
+    schedule: argv.schedule
+  }
+}else{
+  console.log("Missing Informations! Please read application documentation https://github.com/taheroo/Tweet-puppeteer");
+  process.exit(1);
+}
 function scheduler(config) {
   cron.schedule(config.schedule, () => {
     //Request to get Advice
