@@ -3,7 +3,7 @@ const puppeteer = require("puppeteer");
 let postTweetPuppeteer = function postTweetPuppeteer(config, advice) {
   async function asyncCall(config, advice) {
     const browser = await puppeteer.launch({
-      headless: true,
+      headless: false,
       args: [
         "--disable-dev-shm-usage",
         "--shm-size=1gb", // --shm-size=1gb to fix Protocol error (Runtime.callFunctionOn)
@@ -25,41 +25,68 @@ let postTweetPuppeteer = function postTweetPuppeteer(config, advice) {
       console.log("Error: " + e);
     });
 
+    // await page
+    //   .waitForSelector(".js-username-field.email-input.js-initial-focus")
+    //   .then(() => console.log("got Username Field"))
+    //   .catch(e => {
+    //     console.log("Error: " + e);
+    //   });
+
+    // await page
+    //   .waitForSelector(
+    //     ".submit.EdgeButton.EdgeButton--primary.EdgeButtom--medium"
+    //   )
+    //   .then(() => console.log("got login button"))
+    //   .catch(e => {
+    //     console.log("Error: " + e);
+    //   });
+
+    await page.waitFor(2000)
+    .then(() => console.log("waited for 2000"))
+    .catch(e => {
+      console.log("Error: " + e);
+    });
+
+    // await page
+    //   .click(".js-username-field.email-input.js-initial-focus")
+    //   .then(() => console.log("clicked it username_or_email"))
+    //   .catch(e => {
+    //     console.log("Error: " + e);
+    //   });
+    //page.$('select[name="busca_grupo_estado"]');
+
     await page
-      .waitForSelector(".js-username-field.email-input.js-initial-focus")
+      .waitForSelector('[name="session[username_or_email]"]')
       .then(() => console.log("got Username Field"))
       .catch(e => {
         console.log("Error: " + e);
       });
 
     await page
-      .waitForSelector(
-        ".submit.EdgeButton.EdgeButton--primary.EdgeButtom--medium"
-      )
-      .then(() => console.log("got login button"))
-      .catch(e => {
-        console.log("Error: " + e);
-      });
-
-    await page.waitFor(2000).catch(e => {
-      console.log("Error: " + e);
-    });
-
-    await page
-      .click(".js-username-field.email-input.js-initial-focus")
+      .click('[name="session[username_or_email]"]')
       .then(() => console.log("clicked it username_or_email"))
       .catch(e => {
         console.log("Error: " + e);
       });
-    await page.keyboard.type(config.username).catch(e => {
+
+    await page.keyboard.type(config.username)
+    .then(() => console.log("typed username"))
+    .catch(e => {
       console.log("Error: " + e);
     });
 
     await page.waitFor(2000).catch(e => {
       console.log("Error: " + e);
     });
+    // await page
+    //   .click(".js-password-field")
+    //   .then(() => console.log("clicked it session[password]"))
+    //   .catch(e => {
+    //     console.log("Error: " + e);
+    //   });
+    //session[password]
     await page
-      .click(".js-password-field")
+      .click('[name="session[password]"')
       .then(() => console.log("clicked it session[password]"))
       .catch(e => {
         console.log("Error: " + e);
@@ -68,8 +95,9 @@ let postTweetPuppeteer = function postTweetPuppeteer(config, advice) {
       console.log("Error: " + e);
     });
 
+    //data-testid="LoginForm_Login_Button"
     await page
-      .click(".submit.EdgeButton.EdgeButton--primary.EdgeButtom--medium")
+      .click('[data-testid="LoginForm_Login_Button"')
       .then(() => console.log("Clicked LoginForm_Login_Button"))
       .catch(e => {
         console.log("Error: " + e);
