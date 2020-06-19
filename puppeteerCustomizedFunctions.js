@@ -3,7 +3,7 @@ const puppeteer = require("puppeteer");
 let postTweetPuppeteer = function postTweetPuppeteer(config, advice) {
   async function asyncCall(config, advice) {
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: [
         "--disable-dev-shm-usage",
         "--shm-size=1gb", // --shm-size=1gb to fix Protocol error (Runtime.callFunctionOn)
